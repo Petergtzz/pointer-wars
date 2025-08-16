@@ -1,7 +1,5 @@
 #include "linked_list.h"
 
-#define UNUSED()
-
 // Function pointers to (potentially) custom malloc() and
 // free() functions.
 //
@@ -36,6 +34,7 @@ bool linked_list_delete(struct linked_list *ll)
   if(!ll) return false;
 
   struct node *temp = ll->head;
+  // NOTE: free all nodes as well
   while (temp != NULL)
   {
     struct node *next = temp->next;
@@ -51,13 +50,13 @@ size_t linked_list_size(struct linked_list *ll)
 {
   if(!ll) return SIZE_MAX;
 
-  size_t size = 0;
   struct node *temp = ll->head;
-  // NOTE: increment size until we encounter a NULL 
+  // NOTE: increment size until we encounter a NULL
+  size_t size = 0;
   while(temp != NULL)
   {
-    size++;
     temp = temp->next;
+    size++;
   }
 
   return size;
@@ -71,7 +70,7 @@ bool linked_list_insert_end(struct linked_list *ll, unsigned int data)
   new->data = data;
   new->next = NULL;
  
-  // NOTE: quick check for null, if true then we are at the end
+  // NOTE: quick check for NULL, if true then we are at the end
   if(ll->head == NULL) ll->head = new;
   else 
   {
@@ -123,7 +122,7 @@ bool linked_list_insert(struct linked_list *ll, size_t index, unsigned int data)
     pos++;
   }
 
-  // If temp is NULL, index is out of range
+  // NOTE: If temp is NULL, index is out of range
   if (temp == NULL) {
     free_fptr(new);
     return false;
@@ -175,11 +174,6 @@ bool linked_list_remove(struct linked_list *ll, size_t index)
   return true;
 }
 
-// Creates an iterator struct at a particular index.
-// \param linked_list : Pointer to linked_list.
-// \param index       : Index of the linked list to start at.
-// Returns pointer to an iterator on success, NULL otherwise.
-//
 struct iterator * linked_list_create_iterator(struct linked_list * ll,
                                               size_t index)
 {
@@ -209,10 +203,6 @@ struct iterator * linked_list_create_iterator(struct linked_list * ll,
   return result;
 }
 
-// Deletes an iterator struct.
-// \param iterator : Iterator to delete.
-// Returns TRUE on success, FALSE otherwise.
-//
 bool linked_list_delete_iterator(struct iterator * iter)
 {
   if(!iter) return false;
@@ -221,10 +211,6 @@ bool linked_list_delete_iterator(struct iterator * iter)
   return true;
 }
 
-// Iterates to the next node in the linked_list.
-// \param iterator: Iterator to iterate on.
-// Returns TRUE when next node is present, FALSE once end of list is reached.
-//
 bool linked_list_iterate(struct iterator * iter)
 {
   if(!iter || !iter->current_node) return false;
@@ -244,7 +230,7 @@ int main(int argc, char **argv)
 
   linked_list_register_malloc(malloc);
   linked_list_register_free(free);
-  
+
   return 0;
 }
 
