@@ -15,7 +15,7 @@
 // 2. Same goes for the function declarations.
 // 3. In your implementation, make use of malloc_fptr() and free_fptr()
 //    functions for memory allocation and memory freeing. This allows
-//    test infrastructure a bit more flexility. See linked_list.c for
+//    test infrastructure a bit more flexibility. See linked_list.c for
 //    declarations of those function pointers.
 
 // Declaration of the linked_list data structure.
