@@ -234,13 +234,9 @@ int main(int argc, char **argv)
   return 0;
 }
 
-
-
-// NOTE: Why are we using a linked list struct instead of just using the node? 
-// NOTE: Why use malloc that way? why not only call malloc whenever we want to allocate a new node? 
-// why use that complicated function pointers? 
-//  Why  would the iterator have a pointer to the current node plus a data field?
-
+// QUESTIONS: Why use the linked list struct when we can use the node by itself?
+// QUESTIONS: Why use malloc that way? why not call malloc whenever we want to allocate a new node?
+// QUESTIONS: Why does the iterator struct have a data field when we have a current node pointer that already has that field?
 
 // (void)(malloc_fptr);
 // (void)(free_fptr);
